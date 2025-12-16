@@ -1,7 +1,90 @@
 import React, { useState, useMemo } from 'react';
 
-// --- Base de datos de recetas ---
+// --- Base de datos de recetas (AUMENTADA CON SABOR ECUATORIANO 🇪🇨) ---
 const RECIPE_DATABASE = [
+  // --- ECUATORIANAS ---
+  {
+    id: 101,
+    title: "Encebollado Ecuatoriano",
+    category: "lunch",
+    time: "60 min",
+    difficulty: "Medio",
+    calories: 400,
+    ingredients: ["pescado", "atún", "yuca", "cebolla", "cilantro", "limón", "aji"],
+    steps: ["Cocina la yuca y el pescado en agua con condimentos.", "Separa el pescado en láminas.", "Haz un curtido con la cebolla y limón.", "Sirve el caldo con la yuca picada, el pescado y el curtido encima.", "Acompaña con chifles o pan."]
+  },
+  {
+    id: 102,
+    title: "Locro de Papa",
+    category: "lunch",
+    time: "40 min",
+    difficulty: "Fácil",
+    calories: 350,
+    ingredients: ["papa", "leche", "queso", "achiote", "cebolla", "aguacate"],
+    steps: ["Haz un refrito con cebolla y achiote.", "Añade las papas peladas y cortadas con agua.", "Cocina hasta que las papas se deshagan y espese.", "Agrega la leche y el queso desmenuzado.", "Sirve con una tajada de aguacate."]
+  },
+  {
+    id: 103,
+    title: "Seco de Pollo",
+    category: "lunch",
+    time: "50 min",
+    difficulty: "Medio",
+    calories: 550,
+    ingredients: ["pollo", "cebolla", "tomate", "pimiento", "cilantro", "cerveza", "naranjilla", "arroz"],
+    steps: ["Licúa tomate, pimiento, cebolla y naranjilla (o cerveza).", "Sofríe el pollo para sellarlo.", "Añade el licuado y cocina a fuego lento hasta que el pollo esté suave.", "Sirve con arroz amarillo y maduro frito."]
+  },
+  {
+    id: 104,
+    title: "Ceviche de Camarón",
+    category: "lunch",
+    time: "30 min",
+    difficulty: "Fácil",
+    calories: 300,
+    ingredients: ["camarón", "limón", "cebolla", "tomate", "naranja", "cilantro", "salsa de tomate"],
+    steps: ["Cocina los camarones brevemente en agua hirviendo.", "Mezcla jugo de limón, naranja y salsa de tomate.", "Añade cebolla picada, tomate y cilantro.", "Incorpora los camarones y deja marinar.", "Acompaña con canguil o chifles."]
+  },
+  {
+    id: 105,
+    title: "Bolón de Verde",
+    category: "breakfast",
+    time: "40 min",
+    difficulty: "Medio",
+    calories: 480,
+    ingredients: ["verde", "plátano", "queso", "cerdo", "chicharrón", "mantequilla"],
+    steps: ["Pela y cocina (o fríe) el verde en trozos.", "Maja el verde caliente con mantequilla hasta hacer una masa.", "Mezcla con queso o chicharrón.", "Forma bolas grandes.", "Puedes servirlos así o freírlos un poco para que estén crocantes."]
+  },
+  {
+    id: 106,
+    title: "Llapingachos",
+    category: "lunch",
+    time: "45 min",
+    difficulty: "Medio",
+    calories: 420,
+    ingredients: ["papa", "queso", "achiote", "cebolla", "huevo", "maní", "chorizo"],
+    steps: ["Cocina las papas y haz un puré.", "Mezcla con refrito de cebolla y achiote.", "Forma tortillas rellenas de queso.", "Dora las tortillas en una plancha.", "Sirve con huevo frito, chorizo y salsa de maní."]
+  },
+  {
+    id: 107,
+    title: "Tigrillo",
+    category: "breakfast",
+    time: "30 min",
+    difficulty: "Fácil",
+    calories: 450,
+    ingredients: ["verde", "plátano", "huevo", "queso", "cebolla", "leche"],
+    steps: ["Cocina el verde y májalo dejándolo un poco rústico.", "Haz un refrito de cebolla.", "Añade el verde, luego los huevos batidos y el queso.", "Revuelve todo hasta que se integre bien."]
+  },
+  {
+    id: 108,
+    title: "Menestra con Carne Asada",
+    category: "lunch",
+    time: "50 min",
+    difficulty: "Fácil",
+    calories: 600,
+    ingredients: ["lenteja", "frijol", "arroz", "carne", "verde", "cebolla", "tomate"],
+    steps: ["Cocina la menestra (lenteja o frijol) con un refrito de cebolla, tomate y pimiento.", "Asa la carne con sal y comino.", "Sirve la menestra con arroz blanco, la carne y patacones."]
+  },
+
+  // --- CLÁSICAS E INTERNACIONALES ---
   {
     id: 1,
     title: "Arroz con Pollo Clásico",
@@ -34,7 +117,7 @@ const RECIPE_DATABASE = [
   },
   {
     id: 4,
-    title: "Ensalada César",
+    title: "Ensalada César con Pollo",
     category: "dinner",
     time: "15 min",
     difficulty: "Muy Fácil",
@@ -61,10 +144,21 @@ const RECIPE_DATABASE = [
     calories: 200,
     ingredients: ["avena", "banana", "huevo", "leche", "canela"],
     steps: ["Tritura la avena o usa harina.", "Mezcla con banana machacada y huevo.", "Cocina pequeñas porciones en un sartén antiadherente."]
+  },
+  {
+    id: 7,
+    title: "Arroz con Huevo Frito",
+    category: "lunch",
+    time: "10 min",
+    difficulty: "Muy Fácil",
+    calories: 300,
+    ingredients: ["arroz", "huevo", "aceite", "salchicha", "maduro"],
+    steps: ["Calienta el arroz que te sobró o haz fresco.", "Fríe los huevos con puntilla (bordes crocantes).", "Si tienes, fríe unas salchichas o maduros.", "Mezcla todo y disfruta lo simple."]
   }
 ];
 
-const QUICK_ADDS = ["Huevo", "Pollo", "Arroz", "Papa", "Tomate", "Cebolla", "Leche", "Pasta", "Pan", "Aguacate"];
+// Sugerencias rápidas (Incluye ingredientes locales)
+const QUICK_ADDS = ["Huevo", "Pollo", "Arroz", "Papa", "Verde", "Camarón", "Atún", "Queso", "Leche", "Cebolla", "Tomate", "Yuca", "Maní", "Limón"];
 
 export default function JamChef() {
   const [pantry, setPantry] = useState([]);
@@ -87,8 +181,19 @@ export default function JamChef() {
 
   const matchedRecipes = useMemo(() => {
     if (pantry.length === 0) return [];
+    
+    // Función auxiliar para buscar coincidencias parciales (ej: 'verde' coincide con 'plátano verde')
+    const checkMatch = (recipeIng, pantryList) => {
+        return pantryList.some(pIng => 
+            pIng.includes(recipeIng) || recipeIng.includes(pIng) ||
+            (pIng === 'verde' && recipeIng.includes('plátano')) || // Sinónimo común
+            (pIng === 'pescado' && recipeIng.includes('atún'))    // Sinónimo común
+        );
+    };
+
     const scored = RECIPE_DATABASE.map(recipe => {
-      const have = recipe.ingredients.filter(rIng => pantry.some(pIng => pIng.includes(rIng) || rIng.includes(pIng)));
+      const have = recipe.ingredients.filter(rIng => checkMatch(rIng, pantry));
+      
       return {
         ...recipe,
         haveCount: have.length,
@@ -96,6 +201,7 @@ export default function JamChef() {
         haveIngredients: have,
       };
     });
+
     let filtered = scored.filter(r => r.haveCount > 0);
     if (filter !== "all") filtered = filtered.filter(r => r.category === filter);
     return filtered.sort((a, b) => b.matchPercentage - a.matchPercentage);
@@ -132,7 +238,7 @@ export default function JamChef() {
             value={inputValue} 
             onChange={e => setInputValue(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && addIngredient(inputValue)}
-            placeholder="Ej: tomate, huevo..." 
+            placeholder="Ej: yuca, atún, maní..." 
           />
           <button style={styles.btnPrimary} onClick={() => addIngredient(inputValue)}>➕</button>
         </div>
@@ -187,7 +293,7 @@ export default function JamChef() {
             <div style={{ ...styles.badge, backgroundColor: recipe.matchPercentage === 100 ? '#dc2626' : '#f59e0b' }}>
               {recipe.matchPercentage === 100 ? '¡TIENES TODO!' : `${recipe.matchPercentage}% MATCH`}
             </div>
-            <h3 style={{ margin: '0 0 5px 0', color: '#1f2937' }}>{recipe.title}</h3>
+            <h3 style={{ margin: '0 0 5px 0', color: '#1f2937' }}>{recipe.title} {recipe.id > 100 ? '🇪🇨' : ''}</h3>
             <div style={{ fontSize: '12px', color: '#6b7280', display: 'flex', gap: '10px' }}>
               <span>⏱ {recipe.time}</span>
               <span>🔥 {recipe.calories} kcal</span>
@@ -203,7 +309,7 @@ export default function JamChef() {
               </div>
             </div>
           </div>
-        )) : <div style={{ textAlign: 'center', padding: '40px', color: '#9ca3af', border: '2px dashed #e5e7eb', borderRadius: '12px' }}>No hay recetas compatibles 🕷️</div>}
+        )) : <div style={{ textAlign: 'center', padding: '40px', color: '#9ca3af', border: '2px dashed #e5e7eb', borderRadius: '12px' }}>No hay recetas compatibles 🕷️<br/><small>Prueba agregando "Verde", "Yuca" o "Atún"</small></div>}
       </div>
     </div>
   );
@@ -224,7 +330,12 @@ export default function JamChef() {
           <div style={{ padding: '20px' }}>
             <h3 style={{ color: '#dc2626', borderBottom: '2px solid #fee2e2', paddingBottom: '5px' }}>🥗 Ingredientes</h3>
             {selectedRecipe.ingredients.map(ing => {
-              const hasIt = pantry.some(p => p.includes(ing) || ing.includes(p));
+              // Lógica mejorada para encontrar ingredientes
+              const hasIt = pantry.some(p => 
+                  p.includes(ing) || ing.includes(p) ||
+                  (p === 'verde' && ing.includes('plátano')) ||
+                  (p === 'pescado' && ing.includes('atún'))
+              );
               return (
                 <div key={ing} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #f3f4f6' }}>
                   <span style={{ textTransform: 'capitalize', color: hasIt ? '#111827' : '#9ca3af', fontWeight: hasIt ? 'bold' : 'normal' }}>{ing}</span>

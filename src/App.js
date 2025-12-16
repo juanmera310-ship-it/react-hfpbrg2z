@@ -1,29 +1,18 @@
 import React, { useState, useMemo } from 'react';
 
-// --- BASE DE DATOS PREMIUM ---
-// Nota: Aquí hay una selección representativa. Para llegar a 100, puedes copiar y pegar 
-// el formato agregando tus propias variaciones siguiendo este esquema detallado.
+// --- DATOS Y ESTILOS (FUERA DEL COMPONENTE PARA EVITAR ERRORES) ---
 
 const RECIPE_DATABASE = [
-  // ==========================================
-  // 🇪🇨 ECUADOR - DESAYUNOS Y ENTRADAS
-  // ==========================================
+  // 🇪🇨 ECUADOR
   {
     id: 101,
-    title: "Bolón de Verde Mixto (Chicharrón y Queso)",
+    title: "Bolón de Verde Mixto",
     category: "breakfast",
     time: "45 min",
     difficulty: "Medio",
     calories: 550,
     ingredients: ["verde", "queso", "cerdo", "mantequilla", "sal", "aceite"],
-    steps: [
-      "1. PREPARACIÓN DEL VERDE: Pela los verdes y córtalos en trozos medianos. En una sartén con abundante aceite caliente, fríelos a fuego medio hasta que estén dorados por fuera y suaves por dentro (aprox 15 min).",
-      "2. MAJADO: Pasa los verdes calientes a un batea o bowl grande. Májalos con piedra o mazo inmediatamente. Agrega sal y una cucharada generosa de mantequilla para dar suavidad.",
-      "3. EL RELLENO: Incorpora el queso desmenuzado y los trozos de chicharrón (cerdo frito) a la masa. Amasa con las manos (cuidado con el calor) hasta integrar todo.",
-      "4. FORMADO: Toma porciones grandes y forma bolas compactas apretando bien con las manos.",
-      "5. TOQUE FINAL: (Opcional) Pasa los bolones formados nuevamente por aceite caliente 2 minutos para crear una costra crocante.",
-      "6. SERVIR: Acompaña obligatoriamente con una taza de café negro pasado y huevo frito."
-    ]
+    steps: ["1. Pela y corta los verdes. Fríelos en aceite a fuego medio hasta que doren.", "2. Maja los verdes calientes con sal y mantequilla.", "3. Añade queso y chicharrón (cerdo) a la masa. Mezcla bien.", "4. Forma las bolas apretando con las manos.", "5. (Opcional) Pasa los bolones por aceite caliente para hacerlos crocantes.", "6. Sirve con café y huevo frito."]
   },
   {
     id: 102,
@@ -33,101 +22,57 @@ const RECIPE_DATABASE = [
     difficulty: "Fácil",
     calories: 480,
     ingredients: ["verde", "huevo", "queso", "cebolla", "leche", "mantequilla", "cilantro"],
-    steps: [
-      "1. COCCIÓN: Pela y cocina los verdes en agua con sal hasta que estén muy suaves (aprox 20 min). Escurre el agua.",
-      "2. MAJADO RÚSTICO: Maja los verdes pero no totalmente puré, deja algunos trocitos (textura rústica).",
-      "3. EL REFRITO: En una paila o sartén grande, derrite mantequilla y sofríe la cebolla blanca picada finamente hasta que esté transparente.",
-      "4. MEZCLA: Añade el verde majado al refrito y mezcla bien a fuego medio.",
-      "5. HUEVOS Y QUESO: Agrega los huevos batidos directamente sobre la mezcla y revuelve vigorosamente. Inmediatamente añade el queso fresco desmenuzado.",
-      "6. CREMOSIDAD: Vierte un chorrito de leche para dar humedad y sigue revolviendo hasta que el huevo esté cocido pero jugoso. Finaliza con cilantro picado."
-    ]
+    steps: ["1. Cocina los verdes en agua con sal hasta que estén muy suaves.", "2. Májalos dejando algunos trocitos (rústico).", "3. Haz un refrito con cebolla y mantequilla. Añade el verde.", "4. Agrega los huevos batidos y revuelve. Luego el queso.", "5. Pon un chorrito de leche para que quede cremoso.", "6. Sirve con cilantro picado."]
   },
   {
     id: 103,
-    title: "Humitas (Estilo Casero)",
+    title: "Humitas Caseras",
     category: "breakfast",
     time: "90 min",
     difficulty: "Difícil",
     calories: 300,
     ingredients: ["choclo", "queso", "huevo", "cebolla", "mantequilla", "maicena"],
-    steps: [
-      "1. EL CHOCLO: Desgrana el choclo tierno y muélelo finamente (en molino o procesador). Guarda las hojas (pancas) intactas para envolver.",
-      "2. LA MASA: Mezcla el choclo molido con mantequilla derretida, huevos batidos, sal, una pizca de azúcar y un refrito de cebolla blanca. Si está muy aguado, añade un poco de maicena.",
-      "3. ARMADO: Toma dos hojas de choclo superpuestas. Pon una cucharada de masa en el centro y una tajada de queso.",
-      "4. ENVOLTURA: Dobla los costados hacia el centro y la punta hacia abajo, formando un paquete seguro.",
-      "5. COCCIÓN: Cocina al vapor en una tamalera con 'cama' de tusas y hojas por aproximadamente 45-60 minutos."
-    ]
+    steps: ["1. Muele el choclo tierno.", "2. Mezcla con mantequilla, huevo, sal, azúcar y refrito de cebolla.", "3. Pon masa y queso en las hojas de choclo.", "4. Envuelve bien doblando la punta.", "5. Cocina al vapor por 45-60 minutos."]
   },
-
-  // ==========================================
-  // 🇪🇨 ECUADOR - ALMUERZOS Y PLATOS FUERTES
-  // ==========================================
   {
     id: 201,
-    title: "Encebollado de Albacora (El Original)",
+    title: "Encebollado (Original)",
     category: "lunch",
     time: "1 h 30 min",
     difficulty: "Medio",
     calories: 420,
-    ingredients: ["albacora", "yuca", "cebolla", "cilantro", "aji", "comino", "tomate", "limón"],
-    steps: [
-      "1. EL CALDO BASE: Hierve abundante agua. Agrega tomate, cebolla colorada entera, pimiento, ajo, comino, sal y aji peruano (para color).",
-      "2. COCCIÓN DE PROTEÍNA: Añade la albacora en trozos grandes y la yuca pelada al caldo. Cocina hasta que la yuca esté suave. Retira la yuca y el pescado.",
-      "3. ESPESAR: Saca las verduras (cebolla, tomate, pimiento) del caldo y licúalas con un poco del mismo líquido y un trozo pequeño de yuca cocida (para espesar). Cierne esta mezcla y regrésala a la olla.",
-      "4. PREPARACIÓN FINAL: Separa la albacora en láminas (lascas). Corta la yuca en cuadros medianos.",
-      "5. CURTIDO: Corta cebolla colorada en plumas finas, lávala bien y cúrtela con sal y limón.",
-      "6. EMPLATADO: En un plato hondo pon la yuca picada, encima el pescado, baña con el caldo hirviendo y corona con el curtido de cebolla y abundante cilantro. Acompaña con chifles y pan."
-    ]
+    ingredients: ["albacora", "yuca", "cebolla", "cilantro", "aji", "comino", "tomate", "limón", "pescado"],
+    steps: ["1. Hierve agua con tomate, cebolla, pimiento y condimentos.", "2. Cocina ahí la albacora y la yuca. Sácalos cuando estén listos.", "3. Licúa las verduras del caldo con un poco de yuca para espesar.", "4. Sirve: Yuca picada, pescado en láminas, caldo y cebolla curtida.", "5. Acompaña con chifles y limón."]
   },
   {
     id: 202,
-    title: "Seco de Pollo con Naranjilla",
+    title: "Seco de Pollo",
     category: "lunch",
     time: "60 min",
     difficulty: "Medio",
     calories: 550,
     ingredients: ["pollo", "cebolla", "tomate", "pimiento", "naranjilla", "cilantro", "cerveza", "achiote"],
-    steps: [
-      "1. SELLADO: Salpimienta las presas de pollo. En una olla con achiote caliente, dora las presas por ambos lados y retíralas.",
-      "2. EL REFRITO: En el mismo aceite, sofríe cebolla colorada, pimiento y ajo picados en cuadros muy pequeños (brunoise) hasta que estén suaves.",
-      "3. EL LICUADO ÁCIDO: Licúa los tomates con la pulpa de naranjilla (o maracuyá si no tienes) y la cerveza (opcional). Cierne si deseas.",
-      "4. COCCIÓN LENTA: Regresa el pollo a la olla, añade el licuado, sal, comino y una rama de cilantro. Tapa y cocina a fuego bajo por 45 minutos hasta que la salsa espese y el pollo esté muy suave.",
-      "5. FINALIZAR: Rectifica la sal y añade cilantro picado fresco al apagar. Sirve con arroz amarillo y maduro frito."
-    ]
+    steps: ["1. Dora las presas de pollo con achiote.", "2. Haz un refrito con cebolla, pimiento y ajo.", "3. Licúa tomate, naranjilla y cerveza.", "4. Cocina el pollo con el licuado a fuego lento 45 min.", "5. Sirve con arroz amarillo y maduro."]
   },
   {
     id: 203,
-    title: "Locro de Papa Quiteño",
+    title: "Locro de Papa",
     category: "lunch",
     time: "45 min",
     difficulty: "Fácil",
     calories: 380,
     ingredients: ["papa", "leche", "queso", "achiote", "cebolla", "aguacate", "ajo"],
-    steps: [
-      "1. LAS PAPAS: Usa papas 'chola' o harinosa. Pela y corta: la mitad en cubos pequeños (para que se deshagan) y la otra mitad en cubos grandes (para encontrar trozos).",
-      "2. REFRITO BASE: En una olla grande, haz un refrito con aceite, achiote, cebolla blanca picada y ajo machacado. Sofríe 5 minutos.",
-      "3. COCCIÓN: Añade las papas y sofríe 2 minutos más. Agrega agua caliente hasta cubrir las papas más dos dedos extra. Cocina a fuego medio-alto.",
-      "4. TEXTURA: Cuando las papas pequeñas se deshagan y el caldo espese, baja la llama. Aplasta algunas papas con el cucharón contra la olla para dar más espesor.",
-      "5. TOQUE LÁCTEO: Agrega la leche caliente y el queso fresco desmenuzado. Cocina 5 minutos más sin dejar de mecer.",
-      "6. SERVICIO: Sirve muy caliente con una tajada de aguacate encima y salsa de ají."
-    ]
+    steps: ["1. Haz un refrito de cebolla y achiote.", "2. Añade papas cortadas (unas grandes, unas chicas).", "3. Cocina con agua hasta que espese y la papa se deshaga.", "4. Agrega leche y queso fresco.", "5. Sirve con aguacate y ají."]
   },
   {
     id: 204,
-    title: "Guatita Ecuatoriana",
+    title: "Guatita",
     category: "lunch",
     time: "2 horas",
     difficulty: "Difícil",
     calories: 600,
     ingredients: ["mondongo", "papa", "maní", "leche", "cebolla", "ajo", "yerbita"],
-    steps: [
-      "1. LIMPIEZA: Lava el mondongo (panza) con limón y hierbabuena. Cocínalo en olla de presión con ajo y cebolla por 45 min hasta que esté suave. Córtalo en cuadritos.",
-      "2. SALSA DE MANÍ: Licúa la pasta de maní con la leche hasta obtener una mezcla homogénea.",
-      "3. EL GUISO: Haz un refrito con cebolla, pimiento, ajo y achiote. Agrega las papas cortadas en cubos y el mondongo picado.",
-      "4. COCCIÓN: Añade un poco del caldo de la panza y cocina hasta que la papa esté casi lista.",
-      "5. ESPESADO: Incorpora la mezcla de maní y leche. Cocina a fuego lento moviendo constantemente para que no se pegue hasta que espese y hierva bien (aprox 15 min).",
-      "6. FINAL: Agrega cilantro picado y sirve con arroz blanco y huevo duro."
-    ]
+    steps: ["1. Cocina el mondongo hasta que suavice y pícalo.", "2. Licúa maní con leche.", "3. Haz un refrito y cocina las papas en cubos con el mondongo.", "4. Agrega la salsa de maní y cocina hasta espesar.", "5. Sirve con arroz y huevo duro."]
   },
   {
     id: 205,
@@ -137,67 +82,38 @@ const RECIPE_DATABASE = [
     difficulty: "Fácil",
     calories: 320,
     ingredients: ["camarón", "limón", "naranja", "tomate", "cebolla", "salsa de tomate", "mostaza", "cilantro"],
-    steps: [
-      "1. CAMARONES: Pela y desvena los camarones. Cocínalos en agua hirviendo con sal y cebolla solo por 2-3 minutos (hasta que se pongan rosados). ¡No te pases o se ponen cauchosos! Pásalos a agua con hielo.",
-      "2. BASE CÍTRICA: En un bowl, exprime los limones y las naranjas. Agrega sal, pimienta y un poco de mostaza.",
-      "3. VEGETALES: Pica la cebolla colorada en plumas finas (cúrtela previamente si deseas), el pimiento (opcional) y el tomate en cubos pequeños sin semillas.",
-      "4. MEZCLA: Incorpora los camarones fríos, los vegetales, la salsa de tomate (al gusto) y un chorrito de aceite. Mezcla bien.",
-      "5. REPOSO: Deja reposar en la refri 15 minutos para que los sabores se integren. Añade cilantro picado antes de servir. Acompaña con canguil, chifles o arroz."
-    ]
+    steps: ["1. Pasa los camarones por agua hirviendo 3 min. Enfríalos.", "2. Mezcla limón, naranja, salsa de tomate y mostaza.", "3. Pica cebolla y tomate.", "4. Junta todo con los camarones.", "5. Sirve con chifles o canguil."]
   },
-
-  // ==========================================
-  // 🌎 INTERNACIONAL - CENA Y ALMUERZO
-  // ==========================================
+  // 🌎 INTERNACIONAL
   {
     id: 301,
-    title: "Pasta Carbonara Real (Sin Crema)",
+    title: "Pasta Carbonara Real",
     category: "dinner",
     time: "25 min",
     difficulty: "Medio",
     calories: 550,
     ingredients: ["pasta", "huevo", "queso", "tocino", "pimienta", "sal"],
-    steps: [
-      "1. PREPARACIÓN: Corta el tocino o guanciale en tiras y ralla el queso parmesano o pecorino finamente.",
-      "2. LA SALSA (LA CLAVE): En un bowl, bate 2 yemas de huevo y 1 huevo entero con el queso rallado y abundante pimienta negra molida hasta formar una pasta espesa.",
-      "3. CRUJIENTE: En una sartén grande (sin aceite), fríe el tocino hasta que esté dorado y suelte su grasa. Apaga el fuego.",
-      "4. LA PASTA: Cocina la pasta en agua con sal hasta que esté 'al dente'. ¡Guarda una taza del agua de cocción antes de colar!",
-      "5. MANTECADO (TÉCNICA): Pon la pasta caliente directo en la sartén con el tocino (fuego apagado). Agrega un poco de agua de cocción y mueve.",
-      "6. UNIÓN: Vierte la mezcla de huevo y queso sobre la pasta. Mueve vigorosamente usando el calor residual de la pasta para cocinar el huevo sin que se haga tortilla. Añade más agua de cocción si es necesario para crear una crema sedosa."
-    ]
+    steps: ["1. Bate yemas de huevo con queso rallado y pimienta.", "2. Fríe el tocino hasta que dore.", "3. Cocina la pasta. Guarda un poco de agua.", "4. Mezcla pasta y tocino fuera del fuego.", "5. Añade la mezcla de huevo y un poco de agua. Revuelve rápido para crear crema."]
   },
   {
     id: 302,
-    title: "Pollo al Curry Rápido",
+    title: "Pollo al Curry",
     category: "lunch",
     time: "30 min",
     difficulty: "Fácil",
     calories: 450,
     ingredients: ["pollo", "cebolla", "leche", "ajo", "curry", "jengibre", "arroz"],
-    steps: [
-      "1. DORAR: Corta el pollo en cubos. En una sartén profunda con aceite, séllalos a fuego alto hasta que doren. Retira.",
-      "2. AROMÁTICOS: En la misma sartén, baja el fuego y sofríe cebolla picada, ajo y jengibre rallado por 5 minutos.",
-      "3. ESPECIAS: Agrega 2 cucharadas de polvo de curry (y cúrcuma si tienes) al sofrito. Cocina 1 minuto para despertar los aromas.",
-      "4. SALSA: Añade leche de coco (o leche normal/crema) y devuelve el pollo a la sartén. Raspa el fondo de la olla.",
-      "5. REDUCCIÓN: Cocina a fuego medio-bajo por 10 minutos hasta que la salsa espese. Ajusta sal y pimienta.",
-      "6. SERVIR: Sirve sobre arroz blanco caliente."
-    ]
+    steps: ["1. Dora cubos de pollo. Retira.", "2. Sofríe cebolla, ajo y jengibre.", "3. Añade polvo de curry.", "4. Pon leche (o leche de coco) y el pollo.", "5. Cocina 10 min hasta espesar. Sirve con arroz."]
   },
   {
     id: 303,
-    title: "Tacos Mexicanos Caseros",
+    title: "Tacos Caseros",
     category: "dinner",
     time: "25 min",
     difficulty: "Muy Fácil",
     calories: 400,
-    ingredients: ["tortilla", "carne molida", "cebolla", "tomate", "limón", "aguacate", "comino"],
-    steps: [
-      "1. PICO DE GALLO: Pica tomate, cebolla y cilantro finamente. Mezcla en un bowl con jugo de limón y sal. Reserva.",
-      "2. CARNE: En una sartén bien caliente, cocina la carne molida. Sazona fuertemente con sal, pimienta, comino, paprika y ajo en polvo.",
-      "3. COCCIÓN: Deja que la carne se dore bien y se evapore el líquido para que quede con sabor intenso.",
-      "4. GUACAMOLE RÁPIDO: Aplasta el aguacate con un tenedor, añade sal y unas gotas de limón.",
-      "5. ARMADO: Calienta las tortillas en una sartén seca o directo al fuego (segundos). Pon carne, luego pico de gallo y finaliza con aguacate."
-    ]
+    ingredients: ["tortilla", "carne molida", "cebolla", "tomate", "limón", "aguacate", "comino", "carne"],
+    steps: ["1. Haz un pico de gallo (tomate, cebolla, limón).", "2. Fríe la carne molida con comino y sal.", "3. Aplasta el aguacate.", "4. Calienta tortillas.", "5. Arma tus tacos."]
   },
   {
     id: 304,
@@ -207,38 +123,137 @@ const RECIPE_DATABASE = [
     difficulty: "Difícil",
     calories: 500,
     ingredients: ["arroz", "champiñones", "caldo", "cebolla", "vino", "mantequilla", "queso"],
-    steps: [
-      "1. CALDO: Mantén un litro de caldo (pollo o vegetales) hirviendo suavemente en una olla al lado.",
-      "2. SOFRITO: En la olla del risotto, sofríe cebolla picada muy fina con mantequilla. Añade los champiñones laminados y cocina hasta que doren.",
-      "3. EL ARROZ: Añade el arroz arborio (especial para risotto) y sofríelo 2 minutos hasta que el grano se vea transparente en los bordes (nacarado).",
-      "4. VINO: Agrega un chorro de vino blanco y deja evaporar el alcohol completamente.",
-      "5. LA PACIENCIA: Empieza a añadir el caldo caliente cucharón a cucharón. Agrega uno, mueve constantemente hasta que el arroz lo absorba, y repite. Nunca dejes de mover (esto saca el almidón).",
-      "6. MANTECATURA: A los 18-20 min, cuando el arroz esté suave pero firme, apaga el fuego. Agrega un cubo de mantequilla fría y queso parmesano. Bate enérgicamente para dar brillo y cremosidad."
-    ]
+    steps: ["1. Mantén caldo caliente aparte.", "2. Sofríe cebolla y champiñones.", "3. Añade arroz y sofríe (nacarar).", "4. Añade vino y deja evaporar.", "5. Añade caldo poco a poco moviendo siempre.", "6. Al final, añade mantequilla y queso (mantecar)."]
   },
   {
     id: 305,
-    title: "French Toast (Tostadas Francesas)",
+    title: "French Toast",
     category: "breakfast",
     time: "15 min",
     difficulty: "Fácil",
     calories: 350,
     ingredients: ["pan", "huevo", "leche", "canela", "azúcar", "mantequilla", "vainilla"],
-    steps: [
-      "1. MEZCLA: En un plato hondo, bate los huevos, la leche, un chorrito de vainilla, canela y una pizca de azúcar.",
-      "2. REMOJO: Usa pan de molde grueso o pan baguette del día anterior. Pasa cada rebanada por la mezcla, dejando que absorba el líquido unos segundos por lado (sin que se deshaga).",
-      "3. SARTÉN: Calienta una sartén a fuego medio con un poco de mantequilla.",
-      "4. DORADO: Cocina las rebanadas 2-3 minutos por lado hasta que estén doradas y crujientes por fuera.",
-      "5. SERVIR: Sirve caliente con miel, frutas o azúcar impalpable."
-    ]
+    steps: ["1. Bate huevo, leche, vainilla y canela.", "2. Pasa el pan por la mezcla.", "3. Dora en sartén con mantequilla.", "4. Sirve con miel."]
   }
 ];
 
-// --- LISTA DE INGREDIENTES RECONOCIDOS ---
-const QUICK_ADDS = [
-  "Huevo", "Pollo", "Arroz", "Papa", "Verde", "Camarón", "Atún", 
-  "Queso", "Leche", "Cebolla", "Tomate", "Yuca", "Maní", "Carne", "Pasta"
-];
+const QUICK_ADDS = ["Huevo", "Pollo", "Arroz", "Papa", "Verde", "Camarón", "Atún", "Queso", "Leche", "Cebolla", "Tomate", "Yuca", "Maní", "Carne", "Pasta"];
+
+const styles = {
+  container: { fontFamily: 'sans-serif', maxWidth: '600px', margin: '0 auto', backgroundColor: '#f0f4f8', minHeight: '100vh', paddingBottom: '80px' },
+  header: { backgroundColor: '#fff', borderBottom: '4px solid #1e3a8a', padding: '15px', position: 'sticky', top: 0, zIndex: 50, display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' },
+  logo: { fontSize: '22px', fontWeight: '900', color: '#1e3a8a', display: 'flex', alignItems: 'center', gap: '12px', fontStyle: 'italic' },
+  logoIcon: { fontSize: '28px' },
+  card: { backgroundColor: 'white', padding: '24px', borderRadius: '20px', boxShadow: '0 4px 6px rgba(0,0,0,0.02)', marginBottom: '20px', border: '1px solid #e5e7eb' },
+  inputGroup: { display: 'flex', gap: '8px', marginBottom: '16px' },
+  input: { flex: 1, padding: '14px', borderRadius: '14px', border: '2px solid #e5e7eb', fontSize: '16px', outline: 'none', backgroundColor: '#f9fafb' },
+  btnPrimary: { backgroundColor: '#dc2626', color: 'white', border: 'none', padding: '0 20px', borderRadius: '14px', fontSize: '24px', fontWeight: 'bold', cursor: 'pointer' },
+  btnSearch: { width: '100%', background: 'linear-gradient(135deg, #dc2626, #b91c1c)', color: 'white', border: 'none', padding: '18px', borderRadius: '16px', fontSize: '16px', fontWeight: '800', cursor: 'pointer', marginTop: '10px', display: 'flex', justifyContent: 'center', gap: '10px', textTransform: 'uppercase' },
+  tag: { backgroundColor: '#1d4ed8', color: 'white', padding: '8px 14px', borderRadius: '100px', fontSize: '14px', fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '8px', margin: '4px' },
+  suggestion: { backgroundColor: 'white', border: '1px solid #d1d5db', color: '#374151', padding: '6px 14px', borderRadius: '100px', fontSize: '13px', cursor: 'pointer', fontWeight: '500', margin: '4px' },
+  recipeCard: { backgroundColor: 'white', padding: '16px', borderRadius: '16px', border: '1px solid #f3f4f6', marginBottom: '12px', cursor: 'pointer', position: 'relative', overflow: 'hidden' },
+  badge: { position: 'absolute', top: 0, right: 0, padding: '4px 10px', fontSize: '10px', fontWeight: '800', borderBottomLeftRadius: '12px', color: 'white', textTransform: 'uppercase' },
+  backBtn: { background: 'white', border: '1px solid #e5e7eb', padding: '8px 16px', borderRadius: '12px', color: '#374151', fontSize: '14px', fontWeight: '600', cursor: 'pointer', marginBottom: '16px', display: 'inline-flex', alignItems: 'center', gap: '6px' },
+  stepNum: { minWidth: '28px', height: '28px', backgroundColor: '#fee2e2', color: '#dc2626', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', fontSize: '14px', marginTop: '2px' }
+};
+
+// --- SUB-COMPONENTES (Fuera del principal para evitar errores de renderizado) ---
+
+const PantryView = ({ pantry, addIngredient, removeIngredient, inputValue, setInputValue, setActiveTab }) => (
+  <div style={{ padding: '20px' }}>
+    <div style={styles.card}>
+      <h2 style={{ color: '#111827', marginTop: 0 }}>¿Qué cocinamos hoy?</h2>
+      <div style={styles.inputGroup}>
+        <input 
+          style={styles.input} 
+          value={inputValue} 
+          onChange={e => setInputValue(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && addIngredient(inputValue)}
+          placeholder="Ej: verde, queso..." 
+        />
+        <button style={styles.btnPrimary} onClick={() => addIngredient(inputValue)}>+</button>
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        {QUICK_ADDS.map(item => (
+          <button key={item} style={styles.suggestion} onClick={() => addIngredient(item)}>+ {item}</button>
+        ))}
+      </div>
+    </div>
+    <div style={{ padding: '0 5px' }}>
+      {pantry.length === 0 ? <p style={{ textAlign: 'center', color: '#9ca3af' }}>Tu despensa está vacía</p> : 
+        pantry.map(ing => (
+          <span key={ing} style={styles.tag}>
+            {ing.charAt(0).toUpperCase() + ing.slice(1)}
+            <span onClick={() => removeIngredient(ing)} style={{ cursor: 'pointer', marginLeft: '5px' }}>×</span>
+          </span>
+        ))
+      }
+    </div>
+    {pantry.length > 0 && (
+      <button style={styles.btnSearch} onClick={() => setActiveTab("recipes")}>
+        Ver Recetas
+      </button>
+    )}
+  </div>
+);
+
+const RecipesView = ({ matchedRecipes, setActiveTab, setSelectedRecipe, filter, setFilter }) => (
+  <div style={{ padding: '20px' }}>
+    <button style={styles.backBtn} onClick={() => setActiveTab("pantry")}>⬅ Volver</button>
+    <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', marginBottom: '20px' }}>
+      {[{id:'all',l:'Todas'}, {id:'breakfast',l:'🍳 Desayuno'}, {id:'lunch',l:'🍲 Almuerzo'}, {id:'dinner',l:'🍽 Cena'}].map(cat => (
+        <button key={cat.id} onClick={() => setFilter(cat.id)} style={{ padding: '8px 16px', borderRadius: '100px', border: 'none', marginRight: '8px', backgroundColor: filter === cat.id ? '#1e3a8a' : 'white', color: filter === cat.id ? 'white' : '#4b5563' }}>{cat.l}</button>
+      ))}
+    </div>
+    <div>
+      {matchedRecipes.length > 0 ? matchedRecipes.map(recipe => (
+        <div key={recipe.id} style={styles.recipeCard} onClick={() => { setSelectedRecipe(recipe); setActiveTab("details"); }}>
+          <div style={{ ...styles.badge, backgroundColor: recipe.matchPercentage === 100 ? '#10b981' : '#f59e0b' }}>
+            {recipe.matchPercentage === 100 ? 'LISTO' : `FALTAN ${recipe.ingredients.length - recipe.haveCount}`}
+          </div>
+          <h3 style={{ margin: '0 0 5px 0' }}>{recipe.title}</h3>
+          <div style={{ fontSize: '13px', color: '#6b7280' }}>⏱ {recipe.time} • 🔥 {recipe.difficulty}</div>
+        </div>
+      )) : <div style={{ textAlign: 'center', padding: '40px', color: '#9ca3af' }}>No hay recetas compatibles. Intenta agregar "arroz" o "pollo".</div>}
+    </div>
+  </div>
+);
+
+const DetailsView = ({ selectedRecipe, setActiveTab, pantry }) => {
+  if (!selectedRecipe) return null;
+  return (
+    <div style={{ padding: '20px', backgroundColor: 'white', minHeight: '100vh' }}>
+      <button onClick={() => setActiveTab("recipes")} style={styles.backBtn}>⬅ Volver</button>
+      <h1 style={{ fontSize: '28px', margin: '10px 0' }}>{selectedRecipe.title}</h1>
+      <div style={{ marginBottom: '20px', color: '#4b5563' }}>⏰ {selectedRecipe.time} • ⚡ {selectedRecipe.calories} kcal</div>
+      
+      <h3 style={{ borderBottom: '1px solid #eee', paddingBottom: '10px' }}>Ingredientes</h3>
+      <div style={{ display: 'grid', gap: '10px', marginBottom: '20px' }}>
+        {selectedRecipe.ingredients.map(ing => {
+           const hasIt = pantry.some(p => p.includes(ing) || ing.includes(p) || (p === 'verde' && ing.includes('plátano')) || (p === 'pescado' && ing.includes('atún')) || (p === 'carne' && ing.includes('res')));
+           return (
+             <div key={ing} style={{ display: 'flex', justifyContent: 'space-between' }}>
+               <span style={{ textTransform: 'capitalize', fontWeight: hasIt ? 'bold' : 'normal' }}>{ing}</span>
+               {hasIt ? <span style={{ color: 'green' }}>✔</span> : <span style={{ color: 'red', fontSize: '12px' }}>FALTA</span>}
+             </div>
+           );
+        })}
+      </div>
+
+      <h3 style={{ borderBottom: '1px solid #eee', paddingBottom: '10px' }}>Preparación</h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+        {selectedRecipe.steps.map((step, idx) => (
+          <div key={idx} style={{ display: 'flex', gap: '10px' }}>
+            <div style={styles.stepNum}>{idx + 1}</div>
+            <p style={{ margin: 0, lineHeight: '1.5' }}>{step}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// --- COMPONENTE PRINCIPAL ---
 
 export default function JamChef() {
   const [pantry, setPantry] = useState([]);
@@ -262,7 +277,6 @@ export default function JamChef() {
   const matchedRecipes = useMemo(() => {
     if (pantry.length === 0) return [];
     
-    // Lógica de sinónimos para ingredientes latinos
     const checkMatch = (recipeIng, pantryList) => {
         return pantryList.some(pIng => 
             pIng.includes(recipeIng) || recipeIng.includes(pIng) ||
@@ -275,7 +289,6 @@ export default function JamChef() {
 
     const scored = RECIPE_DATABASE.map(recipe => {
       const have = recipe.ingredients.filter(rIng => checkMatch(rIng, pantry));
-      
       return {
         ...recipe,
         haveCount: have.length,
@@ -289,30 +302,43 @@ export default function JamChef() {
     return filtered.sort((a, b) => b.matchPercentage - a.matchPercentage);
   }, [pantry, filter]);
 
-  // --- ESTILOS CSS (Spiderman Theme con Logo Nuevo) ---
-  const styles = {
-    container: { fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif', maxWidth: '600px', margin: '0 auto', backgroundColor: '#f0f4f8', minHeight: '100vh', paddingBottom: '80px' },
-    header: { backgroundColor: '#fff', borderBottom: '4px solid #1e3a8a', padding: '15px', position: 'sticky', top: 0, zIndex: 50, display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' },
-    logo: { fontSize: '22px', fontWeight: '900', color: '#1e3a8a', display: 'flex', alignItems: 'center', gap: '12px', fontStyle: 'italic', letterSpacing: '-0.5px' },
-    // Aquí cambiamos el icono visual del header
-    logoIcon: { fontSize: '28px' }, 
-    card: { backgroundColor: 'white', padding: '24px', borderRadius: '20px', boxShadow: '0 4px 6px rgba(0,0,0,0.02)', marginBottom: '20px', border: '1px solid #e5e7eb' },
-    inputGroup: { display: 'flex', gap: '8px', marginBottom: '16px' },
-    input: { flex: 1, padding: '14px', borderRadius: '14px', border: '2px solid #e5e7eb', fontSize: '16px', outline: 'none', transition: 'border-color 0.2s', backgroundColor: '#f9fafb' },
-    btnPrimary: { backgroundColor: '#dc2626', color: 'white', border: 'none', padding: '0 20px', borderRadius: '14px', fontSize: '24px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 0 #991b1b', display: 'flex', alignItems: 'center' },
-    btnSearch: { width: '100%', background: 'linear-gradient(135deg, #dc2626, #b91c1c)', color: 'white', border: 'none', padding: '18px', borderRadius: '16px', fontSize: '16px', fontWeight: '800', cursor: 'pointer', marginTop: '10px', display: 'flex', justifyContent: 'center', gap: '10px', textTransform: 'uppercase', boxShadow: '0 4px 12px rgba(220, 38, 38, 0.3)' },
-    tag: { backgroundColor: '#1d4ed8', color: 'white', padding: '8px 14px', borderRadius: '100px', fontSize: '14px', fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '8px', margin: '4px', boxShadow: '0 2px 4px rgba(29, 78, 216, 0.2)' },
-    suggestion: { backgroundColor: 'white', border: '1px solid #d1d5db', color: '#374151', padding: '6px 14px', borderRadius: '100px', fontSize: '13px', cursor: 'pointer', fontWeight: '500', margin: '4px', transition: 'all 0.2s' },
-    recipeCard: { backgroundColor: 'white', padding: '16px', borderRadius: '16px', border: '1px solid #f3f4f6', marginBottom: '12px', cursor: 'pointer', position: 'relative', overflow: 'hidden', boxShadow: '0 2px 4px rgba(0,0,0,0.02)', transition: 'transform 0.2s' },
-    badge: { position: 'absolute', top: 0, right: 0, padding: '4px 10px', fontSize: '10px', fontWeight: '800', borderBottomLeftRadius: '12px', color: 'white', textTransform: 'uppercase' },
-    filterBtn: { padding: '8px 16px', borderRadius: '100px', border: 'none', cursor: 'pointer', fontWeight: '600', marginRight: '8px', fontSize: '13px', transition: 'all 0.2s' },
-    backBtn: { background: 'white', border: '1px solid #e5e7eb', padding: '8px 16px', borderRadius: '12px', color: '#374151', fontSize: '14px', fontWeight: '600', cursor: 'pointer', marginBottom: '16px', display: 'inline-flex', alignItems: 'center', gap: '6px' },
-    stepNum: { minWidth: '28px', height: '28px', backgroundColor: '#fee2e2', color: '#dc2626', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', fontSize: '14px', marginTop: '2px' }
-  };
+  return (
+    <div style={styles.container}>
+      {activeTab !== 'details' && (
+        <div style={styles.header}>
+            <div style={styles.logo}><span style={styles.logoIcon}>👨‍🍳</span> JAM CHEF</div>
+            <span style={{ backgroundColor: '#eff6ff', color: '#1e3a8a', padding: '6px 12px', borderRadius: '100px', fontSize: '12px', fontWeight: '700' }}>PRO</span>
+        </div>
+      )}
+      
+      {activeTab === 'pantry' && (
+        <PantryView 
+          pantry={pantry} 
+          addIngredient={addIngredient} 
+          removeIngredient={removeIngredient} 
+          inputValue={inputValue} 
+          setInputValue={setInputValue} 
+          setActiveTab={setActiveTab} 
+        />
+      )}
 
-  // --- PANTALLAS ---
-  
-  const PantryScreen = () => (
-    <div style={{ padding: '20px' }}>
-      <div style={styles.card}>
-        <h2 sty
+      {activeTab === 'recipes' && (
+        <RecipesView 
+          matchedRecipes={matchedRecipes} 
+          setActiveTab={setActiveTab} 
+          setSelectedRecipe={setSelectedRecipe} 
+          filter={filter} 
+          setFilter={setFilter} 
+        />
+      )}
+
+      {activeTab === 'details' && (
+        <DetailsView 
+          selectedRecipe={selectedRecipe} 
+          setActiveTab={setActiveTab} 
+          pantry={pantry} 
+        />
+      )}
+    </div>
+  );
+}
